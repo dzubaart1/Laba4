@@ -107,7 +107,7 @@ public class Tree
             return _array[n].Label;
         }
 
-        int temp = FindParent(n, _root);
+        int temp = FindParent(_root, n);
         if (temp != -1)
         {
             return _array[n].Label;

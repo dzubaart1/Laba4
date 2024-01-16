@@ -2,7 +2,7 @@ package List;
 
 public class Tree
 {
-    private static final int LENGTH = 10; // длина массива
+    private final static  int LENGTH = 10; // длина массива
     private static Item[] _array; // массив
     private static int SPACE; // список свободных ячееек
     private int _root; // корень
@@ -73,11 +73,15 @@ public class Tree
 
         if (_root == n)
         {
-            return _array[_root].Son.Label;
+            if (_array[_root].Son != null)
+            {
+                return _array[_root].Son.Label;
+            }
+            return -1;
         }
 
         int item = FindParent(_root, n);
-        if (item == -1)
+        if (item == -1 || _array[n].Son == null)
         {
             return -1;
         }
@@ -94,9 +98,20 @@ public class Tree
     {
         int item = FindParent(_root, n);
 
-        if (item != -1 && _array[item].Son.NextSon != null)
+        if(item == -1)
         {
-            return _array[item].Son.NextSon.Label;
+            return -1;
+        }
+
+        var elem = _array[item].Son;
+        while(elem.Label != n)
+        {
+            elem = elem.NextSon;
+        }
+
+        if(elem.NextSon != null)
+        {
+            return elem.NextSon.Label;
         }
 
         return -1;
@@ -214,7 +229,7 @@ public class Tree
                 return root;
             }
 
-            int res = FindParent(son.Label, root);
+            int res = FindParent(son.Label, n);
             if (res != -1)
             {
                 return res;

@@ -4,6 +4,8 @@ public class Main
 {
     public static void main(String[] args)
     {
+        Tree.Initialize();
+
         Tree tree = new Tree();
         Tree tree2 = new Tree();
         tree = tree.Create("label");
